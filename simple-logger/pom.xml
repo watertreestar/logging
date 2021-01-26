@@ -9,7 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>commons-logging</artifactId>
+    <packaging>jar</packaging>
+
+    <artifactId>simple-logger</artifactId>
     <build>
         <plugins>
             <plugin>
@@ -20,6 +22,23 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <locales>zh_CN</locales>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+            </plugin>
+
         </plugins>
     </build>
 

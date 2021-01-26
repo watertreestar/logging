@@ -25,13 +25,13 @@ public class SimpleLog implements Log {
 
     private static String PROPERTIES_PREFIX = "com.xingyao.logging.";
 
-    private static final String DEFUALT_DATE_TIME_FORMAT = "yyyy-MM-dd hh:mm:ss:SSS zzz";
+    private static final String DEFUALT_DATE_TIME_FORMAT = "yyyy-MM-dd hh:MM:ss SSS";
 
     protected static boolean showLogName = true;
 
     protected static boolean showShortName = true;
 
-    protected static boolean showDateTime = false;
+    protected static boolean showDateTime = true;
 
     protected static String dateTimeFormat = DEFUALT_DATE_TIME_FORMAT;
 
@@ -223,83 +223,128 @@ public class SimpleLog implements Log {
             pw.close();
             buf.append(sw.toString());
         }
+        this.print(buf);
 
+    }
+
+    private void print(StringBuffer wb){
+        System.out.println(wb.toString());
     }
 
     @Override
     public void debug(Object message) {
-
+        if(this.isDebugEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_DEBUG,message,null);
+        }
     }
+
 
     @Override
     public void debug(Object message, Throwable t) {
-
+        if(this.isDebugEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_DEBUG,message,t);
+        }
     }
 
     @Override
     public void error(Object message) {
-
+        if(this.isErrorEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_ERROR,message,null);
+        }
     }
 
     @Override
     public void error(Object message, Throwable t) {
-
+        if(this.isErrorEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_ERROR,message,t);
+        }
     }
 
+    @Override
     public void fatal(Object message) {
-
+        if(this.isFatalEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_FATAL,message,null);
+        }
     }
 
+    @Override
     public void fatal(Object message, Throwable t) {
-
+        if(this.isFatalEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_FATAL,message,t);
+        }
     }
 
+    @Override
     public void info(Object message) {
-
+        if(this.isInfoEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_INFO,message,null);
+        }
     }
 
+    @Override
     public void info(Object message, Throwable t) {
-
+        if(this.isInfoEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_INFO,message,t);
+        }
     }
 
-    public boolean isDebugEnabled() {
-        return false;
-    }
-
-    public boolean isErrorEnabled() {
-        return false;
-    }
-
-    public boolean isFatalEnabled() {
-        return false;
-    }
-
-    public boolean isInfoEnabled() {
-        return false;
-    }
-
-    public boolean isTraceEnabled() {
-        return false;
-    }
-
-    public boolean isWarnEnabled() {
-        return false;
-    }
-
+    @Override
     public void trace(Object message) {
-
+        if(this.isTraceEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_TRACE,message,null);
+        }
     }
 
+    @Override
     public void trace(Object message, Throwable t) {
-
+        if(this.isTraceEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_TRACE,message,t);
+        }
     }
 
+    @Override
     public void warn(Object message) {
-
+        if(this.isWarnEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_WARN,message,null);
+        }
     }
 
+    @Override
     public void warn(Object message, Throwable t) {
+        if(this.isWarnEnabled()){
+            this.log(SimpleLog.LOG_LEVEL_WARN,message,t);
+        }
+    }
 
+
+    @Override
+    public boolean isDebugEnabled() {
+        return this.logLevel <= SimpleLog.LOG_LEVEL_DEBUG;
+    }
+
+    @Override
+    public boolean isErrorEnabled() {
+         return this.logLevel <= SimpleLog.LOG_LEVEL_ERROR;
+    }
+
+    @Override
+    public boolean isFatalEnabled() {
+         return this.logLevel <= SimpleLog.LOG_LEVEL_FATAL;
+    }
+
+    @Override
+    public boolean isInfoEnabled() {
+         return this.logLevel <= SimpleLog.LOG_LEVEL_INFO;
+    }
+
+    @Override
+    public boolean isTraceEnabled() {
+         return this.logLevel <= SimpleLog.LOG_LEVEL_TRACE;
+    }
+
+    @Override
+    public boolean isWarnEnabled() {
+         return this.logLevel <= SimpleLog.LOG_LEVEL_WARN;
     }
 
 
