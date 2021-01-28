@@ -78,7 +78,7 @@ public class SimpleLog implements Log {
         while(null == lvl && i > -1) {
             name = name.substring(0,i);
             lvl = getStringProperty(PROPERTIES_PREFIX + "log." + name);
-            i = String.valueOf(name).lastIndexOf(".");
+            i = name.lastIndexOf(".");
         }
 
         if(null == lvl) {
@@ -133,6 +133,7 @@ public class SimpleLog implements Log {
         }catch (IOException e){
             throw new LogConfigurationException("loading log configuration error",e);
         }
+        logProperties = properties;
 
         showDateTime = getBooleanProperty(PROPERTIES_PREFIX + "showDateTime",showDateTime);
         showLogName = getBooleanProperty(PROPERTIES_PREFIX + "showLogName",showLogName);

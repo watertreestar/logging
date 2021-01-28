@@ -6,7 +6,7 @@ import org.junit.Test;
  * @Author ranger
  * @Date 2021/1/26 22:57
  **/
-public abstract class AbastractLogTest {
+public abstract class AbstractLogTest {
 
     public abstract Log getLog();
 
@@ -22,5 +22,10 @@ public abstract class AbastractLogTest {
 
 
         log.error("log error msg",new RuntimeException("test exception"));
+
+        log.error("log error, test for error level log message,",new IllegalStateException("test"));
+
+
+
     }
 }
